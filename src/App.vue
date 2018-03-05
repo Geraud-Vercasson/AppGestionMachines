@@ -2,20 +2,17 @@
     <div id="app">
         <img src="http://www.thelogofactory.com/wp-content/uploads/2015/08/coffee-services-unlimited-logo.png">
         <h1>{{ msg }}</h1>
-        <button class="btn btn-primary" @click="onMachinesListClick">Accéder à la liste des machines</button>
-        <button class="btn btn-primary" @click="onMapClick">Accéder à la carte des machines</button>
-        <machines-list/>
-        <machines-map/>
+        <router-link to="/list" class="btn btn-primary">Accéder à la liste des machines</router-link>
+        <router-link to="/map" class="btn btn-primary">Accéder à la carte des machines</router-link>
+        <router-view/>
+
     </div>
 </template>
 
 <script>
-    import MachinesList from "./MachinesList.vue";
-    import MachinesMap from './MachinesMap.vue'
 
     export default {
-        components: {'MachinesList':MachinesList,
-                    'MachinesMap':MachinesMap},
+
         name: 'app',
         data() {
             return {
