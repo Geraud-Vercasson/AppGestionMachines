@@ -4,12 +4,18 @@
         <h1>{{ msg }}</h1>
         <button class="btn btn-primary" @click="onMachinesListClick">Accéder à la liste des machines</button>
         <button class="btn btn-primary" @click="onMapClick">Accéder à la carte des machines</button>
-
+        <machines-list/>
+        <machines-map/>
     </div>
 </template>
 
 <script>
+    import MachinesList from "./MachinesList.vue";
+    import MachinesMap from './MachinesMap.vue'
+
     export default {
+        components: {'MachinesList':MachinesList,
+                    'MachinesMap':MachinesMap},
         name: 'app',
         data() {
             return {
