@@ -4,6 +4,7 @@ import VueRouter from 'vue-router'
 import MachinesList from './MachinesList.vue'
 import MachinesMap from './MachinesMap.vue'
 import * as VueGoogleMaps from 'vue2-google-maps'
+
 Vue.use(VueGoogleMaps, {
   load: {
     key: require('../config.json').myAPIkey,
