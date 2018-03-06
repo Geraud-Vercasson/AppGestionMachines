@@ -3,12 +3,22 @@ import App from './App.vue'
 import VueRouter from 'vue-router'
 import MachinesList from './MachinesList.vue'
 import MachinesMap from './MachinesMap.vue'
+import * as VueGoogleMaps from 'vue2-google-maps'
+Vue.use(VueGoogleMaps, {
+  load: {
+    key: require('../config.json').myAPIkey,
+  }
+})
 
 Vue.use(VueRouter)
 
 const routes = [
-    {path: '/list', component:MachinesList},
-    {path: '/map', component:MachinesMap}
+    {path: '/list',
+        name:'list',
+        component:MachinesList},
+    {path: '/map',
+        name:'map',
+        component:MachinesMap}
 ]
 
 const router = new VueRouter({

@@ -1,6 +1,6 @@
-# gestion-machines
+# gestionMachines
 
-> Création d'un application de gestion de parc de machines à café
+> Une App de gestion de parc de machine à café
 
 ## Build Setup
 
@@ -15,4 +15,4 @@ npm run dev
 npm run build
 ```
 
-For more information see the [docs for vueify](https://github.com/vuejs/vueify).
+For detailed explanation on how things work, consult the [docs for vue-loader](http://vuejs.github.io/vue-loader).

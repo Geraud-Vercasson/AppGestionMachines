@@ -2,22 +2,38 @@
     <div id="app">
         <img src="http://www.thelogofactory.com/wp-content/uploads/2015/08/coffee-services-unlimited-logo.png">
         <h1>{{ msg }}</h1>
-        <router-link to="/list" class="btn btn-primary">Accéder à la liste des machines</router-link>
+        <router-link to="/list"  class="btn btn-primary">Accéder à la liste des machines</router-link>
         <router-link to="/map" class="btn btn-primary">Accéder à la carte des machines</router-link>
-        <router-view/>
+        <router-view :machines="listeMachines"/>
 
     </div>
 </template>
 
 <script>
 
+    // let config = require("../config.json");
+
     export default {
 
         name: 'app',
         data() {
             return {
-                msg: 'Bienvenue dans la gestion du parc de machines!'
+                msg: 'Bienvenue dans la gestion du parc de machines!',
+
+                listeMachines: [{
+                    id: 1,
+                    name: 'What else ?',
+                    status: true,
+                    checkedAt: new Date(),
+                }, {
+                    id: 2,
+                    name: 'Broken',
+                    status: false,
+                    checkedAt: new Date(),
+                }]
             }
+
+
         },
         methods: {
             onMachinesListClick: function () {
