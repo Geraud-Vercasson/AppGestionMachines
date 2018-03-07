@@ -2,6 +2,8 @@
   <div id="app">
     <img src="http://www.thelogofactory.com/wp-content/uploads/2015/08/coffee-services-unlimited-logo.png">
     <h1>{{ msg }}</h1>
+    <h2 class="red" v-if="error != null"> une erreur est survenue : {{error}}</h2>
+    <h2 v-if="loading">Chargement</h2>
     <div class="form-group">
       <label for="selectMachines">Sélectionnez les machines à afficher</label>
       <select class="form-control" id="selectMachines" v-model="shown">
@@ -10,8 +12,14 @@
         <option value="KO">Inactives</option>
       </select>
     </div>
-    <router-link to="/list" class="btn btn-primary">Accéder à la liste des machines</router-link>
-    <router-link to="/map" class="btn btn-primary">Accéder à la carte des machines</router-link>
+    <div>
+      <router-link to="/list" class="btn btn-primary">Accéder à la liste des machines</router-link>
+      <router-link to="/map" class="btn btn-primary">Accéder à la carte des machines</router-link>
+    </div>
+    <br>
+    <div>
+      <ajout-machine v-on:success="getMachineList"/>
+    </div>
     <router-view :machines="machinesFilter(shown)" :position="myPosition"/>
 
   </div>
@@ -34,17 +42,7 @@
       }
     },
     created() {
-      axios.get('https://machine-api-campus.herokuapp.com/api/machines').then(response => {
-        this.listeMachines = response.data
-      }).catch(error => {
-        console.log(error);
-      });
-      window.navigator.geolocation.getCurrentPosition(pos => {
-        this.myPosition = {
-          lat: pos.coords.latitude,
-          lng: pos.coords.longitude
-        }
-      })
+      this.getMachineList()
     },
     methods: {
       machinesFilter(toShow) {
@@ -64,6 +62,21 @@
         else {
           return [];
         }
+      },
+      getMachineList(){
+        this.loading = true
+        axios.get('https://machine-api-campus.herokuapp.com/api/machines').then(response => {
+          this.loading = false
+          this.listeMachines = response.data
+        }).catch(error => {
+          this.error = error;
+        });
+        window.navigator.geolocation.getCurrentPosition(pos => {
+          this.myPosition = {
+            lat: pos.coords.latitude,
+            lng: pos.coords.longitude
+          }
+        })
       }
     }
   }
@@ -102,5 +115,10 @@
 
   a {
     color: #42b983;
+  }
+  .red{
+    color: red;
+    font-weight: bold;
+    text-transform: uppercase;
   }
 </style>
